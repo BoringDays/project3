@@ -1,0 +1,25 @@
+{
+  "name": "proj1",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "BoringDays <everflashdance@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/public",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iscroll": "^5.1.3",
+    "bootstrap": "^3.3.6"
+  }
+}
