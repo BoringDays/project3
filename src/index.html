@@ -1,24 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <!-- build:js public/bootstrap.min.css -->
-    <script src="public/bootstrap/dist/css/bootstrap.min.css"></script>
-    <!-- endbuild -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!-- no more baidu ads -->
+    <title>帝隆P2P</title>
     <!-- build:js public/public.min.js -->
     <script src="public/jquery/dist/jquery.min.js"></script>
     <script src="public/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="public/odometer/odometer.min.js"></script>
+    <script src="public/iscroll/build/iscroll-probe.js"></script>
+    <script src="public/hammerjs/hammer.min.js"></script>
+    <!-- endbuild -->
+    <!-- build:css public/public.min.css -->
+    <link rel="stylesheet" type="text/css" href="public/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/main.css"/>
+    <!-- endbuild -->
+    <!-- build:css css/index.css -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/css/style/index.css"/>
     <!-- endbuild -->
 </head>
 <body>
-    <h1>screw you guys, I'm going home!</h1>
-    <h2>oh bastards, they killed Kenny!</h2>
-    <section></section>
-    <script>
-        $(function(){
-            $('section').html('screw you!');
-        });
-    </script>
+<main class="container-fluid">
+    <div class="row">
+        <header data-spy="affix">
+            <span class="title-icon"></span>
+
+            <h1>帝隆P2P</h1>
+        </header>
+    </div>
+    <section id="scroll-wrapper">
+        <div id="pullDown" class="loading-pull-down row">
+            <div class="ball col-xs-12">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="index-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                </ol>
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="images/slide1.jpg" alt="" width="100%">
+
+                        <div class="carousel-caption"></div>
+                    </div>
+                    <div class="item">
+                        <img src="images/slide2.jpg" alt="" width="100%">
+
+                        <div class="carousel-caption"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row grid">
+            <div class="col-xs-6 grid-cell">
+                <div class="grid-icon icon-1"></div>
+                <span class="cell-title">累计投资(元)</span>
+
+                <div id="number1" class="odometer grid-num-odometer"></div>
+            </div>
+            <div class="col-xs-6 grid-cell">
+                <div class="grid-icon icon-2"></div>
+                <span class="cell-title">累计赚取(元)</span>
+
+                <div id="number2" class="odometer grid-num-odometer"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 index-bottom-container">
+                <ul class="index-list">
+                    <li>
+                        <span class="new-label">新标</span>
+
+                        <div class="list-cell-top">
+                            <h4 class="clearfix">
+                                <span class="list-cell-title">新疆葡萄庄园项目新疆葡萄庄园项目新疆葡萄庄园项目</span>
+                                <ul class="icon-group">
+                                    <li>实</li>
+                                    <li>HR</li>
+                                </ul>
+                            </h4>
+                            <span class="label-tag tag-date">1个月</span>
+                            <span class="label-tag tag-money">10,000元借款</span>
+                        </div>
+                        <div class="list-cell-bottom">
+                            <div class="circle-wrap">
+                                <div class="circle-inner">
+                                    <p>预期年化最高</p>
+
+                                    <div class="highest-percent"><b>12</b>%</div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="42"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 42%;"></div>
+                                    </div>
+                                    <span>42%</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">马上投资</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="pullUp" class="loading-pull-up row">
+            <div class="ball col-xs-12">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </section>
+    <div class="row">
+        <nav id="nav-bottom" data-spy="affix">
+            <ul class="nav nav-pills">
+                <li class="active">
+                    <a href="#">
+                        <span class="icon icon-bottom-home"></span>
+                        <span class="nav-tab-label">首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-bottom-money"></span>
+                        <span class="nav-tab-label">理财</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-bottom-borrow"></span>
+                        <span class="nav-tab-label">借款</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-bottom-transfer"></span>
+                        <span class="nav-tab-label">转让</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-bottom-user"></span>
+                        <span class="nav-tab-label">我</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</main>
+<div class="modal" id="modal_1" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!--<div class="modal-content">-->
+        <button type="button" class="close-modal" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+        <div>
+            <img src="images/pop.png" width="100%"/>
+            <span id="money-total">￥
+                <span class="odometer"></span>
+            </span>
+        </div>
+        <!--</div>-->
+    </div>
+</div>
+<!-- build:js js/common.js -->
+<script src="scripts/common.js"></script>
+<!-- endbuild -->
+<!-- build:js js/index.js -->
+<script src="scripts/index.js" defer></script>
+<!-- endbuild -->
 </body>
 </html>

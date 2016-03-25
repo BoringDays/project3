@@ -1,0 +1,21 @@
+//index
+$header-bar-background-color: #1898fd;
+
+$list-cell-icon-group-font-color: #ff8a00;
+$list-cell-icon-group-border: 1px solid #ff8a00;
+
+$middle-circle-outside-background-color: #e9f5fe;
+$middle-circle-background-color: #39a8ff;
+$middle-circle-middle-shadow: 0 1px 0 #0785e9, 0 2px 0 #75c2ff;
+$middle-circle-progress-color: #0174ce;
+
+@mixin btn-primary-btn() {
+  color: #fff;
+  background-color: #39a8ff;
+  border-color: #39a8ff;
+}
+@mixin btn-primary-btn-focus() {
+  color: #fff;
+  background-color: #39a8ff;
+  border-color: #39a8ff;
+}

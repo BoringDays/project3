@@ -32,3 +32,6 @@ src/public
 #webstorm project files
 .idea
 .ideas
+
+#ruby sass cache directory
+.sass-cache

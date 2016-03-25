@@ -3,63 +3,77 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 
+/*
+todo:
+1. add browserify support, cause I can handle compiling in back end, not in front end like require.js
+2. hot refresh
+3. test dist files in hbuilder app project
+4. add first level pages
+5. fix pull down refresh event
+6. if time is still enough, try vue
+*/
+
 gulp.task('clean-css', function () {
-    return gulp.src('dist/css', {read: false})
+    return gulp.src(['./dist/css', './src/stylesheets/css'], {read: false})
         .pipe($.clean());
 });
 
 gulp.task('clean-js', function () {
-    return gulp.src('dist/js', {read: false})
+    return gulp.src('./dist/js', {read: false})
         .pipe($.clean());
 });
 
 gulp.task('clean-public', function () {
-    return gulp.src('dist/public', {read: false})
+    return gulp.src('./dist/public', {read: false})
         .pipe($.clean());
 });
 
-//ÎªÊ²Ã´ÎÒÕâ±ßµÄnode.jsÒ»ÔËĞĞsourcemap£¬ÎŞÂÛÊÇwebpack»¹ÊÇgulp¶¼»áÖ±½Ó±¨´íÆÍ½Ö¡­¡­´úÂëÓ¦¸ÃÎŞÎó£¬²»ÖªµÀÔÚ¸÷Î»µÄ»úÆ÷ÉÏ»á²»»áÒ²ÕâÑù
+//ä¸ºä»€ä¹ˆæˆ‘è¿™è¾¹çš„node.jsä¸€è¿è¡Œsourcemapï¼Œæ— è®ºæ˜¯webpackè¿˜æ˜¯gulpéƒ½ä¼šç›´æ¥æŠ¥é”™ä»†è¡—â€¦â€¦ä»£ç åº”è¯¥æ— è¯¯
 gulp.task('compile-sass', ['clean-css'], function () {
-    return gulp.src('./src/stylesheets/main.scss')
-        //.pipe($.sourcemaps.init())
-        .pipe($.sass().on('error', $.sass.logError))
+    $.rubySass.clearCache();//æ¸…ç†ç¼“å­˜ï¼Œå½“å‰ç‰ˆæœ¬çš„gulp-ruby-sassä¼¼ä¹ä¸èƒ½åœ¨optionsè®¾ç½®noCacheäº†
+    return $.rubySass('./src/stylesheets/scss/**/*.scss')
+        .on('error', $.rubySass.logError)
+        //.pipe($.sourcemaps.write('maps', {
+        //    includeContent: false,
+        //    sourceRoot: 'source'
+        //}))
         .pipe($.autoprefixer('last 1 version'))
         .pipe($.cleanCss())//minify css, gulp-minify-css has renamed to gulp-clean-css
-        //.pipe($.sourcemaps.write())
-        .pipe(gulp.dest('dist/css'))
-        .pipe(browserSync.stream());
+        .pipe(gulp.dest('./src/stylesheets/css'))
+        .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('minify-js', ['clean-js'], function () {
+gulp.task('minify-js', function () {
     return gulp.src('./src/scripts/**')
         .pipe($.uglify())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('images', function () {
     return gulp.src('./src/images/**/*')
         // Pass in options to the task
         .pipe($.imagemin({optimizationLevel: 5}))
-        .pipe(gulp.dest('dist/img'));
+        .pipe(gulp.dest('./dist/images'));
 });
 
-gulp.task('minify-html', ['clean-public'], function () {
-    return gulp.src('./src/**![public]/*.html')//²»±àÒëiscroll×Ô´øÄÇ¶ÑdemoÒ³Ãæ
+//ä¸ä½œä¸ºä¾èµ–æ‰§è¡Œçš„è¯ï¼Œä¼šå¯¼è‡´userefå…ˆäºsassç¼–è¯‘å®Œæˆå¯¼è‡´æ‰¾ä¸åˆ°æ–‡ä»¶çš„é”™è¯¯ï¼›æ˜¯å¦å­˜åœ¨ä¼˜åŒ–æ”¹è¿›ç©ºé—´ï¼Ÿ
+gulp.task('minify-html', ['compile-sass', 'clean-public'], function () {
+    return gulp.src(['./src/html/**/*.html', './src/index.html'], {base: './src/'})//æ²¡æœ‰baseå°±å…¨éƒ¨ä¼šè¾“å‡ºåˆ°./distæ ¹ç›®å½•ä¸‹
         .pipe($.useref())
-        .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))//gulpÔËĞĞµ½Õâ£¬Á÷ÀïÃæ»¹ÓĞjsºÍcss£¬Èç¹ûÃ»ÓĞgulp-if´¦Àí¾Í»á³öÊÂ
-        .pipe(gulp.dest('dist'));
+        .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('browser-sync', function () {
     browserSync.init({
         server: {
             baseDir: "./dist"
-            //,directory: true
+            , directory: true
         }
     });
-    gulp.watch("*.scss", ["compile-sass"]);
+    gulp.watch("*.scss", ["compile-sass"]).on("change", reload);
     gulp.watch("*.js", ["minify-js"]).on("change", reload);
-    gulp.watch("*.html", ["minify-html"]);
+    gulp.watch("*.html", ["minify-html"]).on("change", reload);
 });
 
-gulp.task('default', ['compile-sass', 'minify-js', 'minify-html', 'images', 'browser-sync'])
+gulp.task('default', ['minify-js', 'minify-html', 'images', 'browser-sync']);

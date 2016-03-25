@@ -1,0 +1,234 @@
+@import "theme/currentTheme";
+
+@mixin nav-bottom-icon-background-position($pos) {
+  background: url(../../images/bottom.png) 0 $pos no-repeat;
+}
+
+body {
+  height: 100%;
+  background: #eee;
+  font-family: "Microsoft YaHei UI", Helvetica;
+}
+
+//pull up pull down loading div
+.loading-pull-down, .loading-pull-up {
+  display: none;
+  height: 30px;
+  padding: 5px 15px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+
+  .ball{
+    position: relative;
+    margin: auto;
+    width: 20px;
+
+    div {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      animation: spinner1 2s infinite linear;
+
+      &:nth-child(1){
+        left: 0;
+        background-color: #3789fa;
+      }
+      &:nth-child(2){
+        left: 20px;
+        background-color: #eb4346;
+      }
+    }
+  }
+}
+
+//top bar
+header {
+  position: relative;
+  z-index: 99;
+  width: 100%;
+  h1 {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    font-size: 18px;
+    color: #fff;
+    background-color: $header-bar-background-color;
+    text-align: center;
+  }
+  .title-icon {
+    float: left;
+    position: relative;
+    left: 10px;
+    z-index: 1;
+    display: inline-block;
+    width: 43px;
+    height: 44px;
+    background: url(../../images/icon_h.png) 0 50% no-repeat;
+    background-size: contain;
+  }
+}
+
+//bottom nav
+#nav-bottom.affix, #nav-bottom.affix-top, #nav-bottom.affix-bottom {
+    left: 0;
+    bottom: 0;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+  background-color: #fff;
+}
+
+.nav-pills > li + li {
+  margin-left: 0;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+  color: #333;
+  background-color: #fff;
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+  height: 60px;
+  border: 0;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.nav li {
+  width: 20%;
+}
+
+.nav .icon {
+  display: block;
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+}
+
+.nav-tab-label {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #555;
+}
+
+.nav li.active .nav-tab-label {
+  width: 100%;
+  /*color: #e63c49;*/
+}
+
+.icon-bottom-home {
+  @include nav-bottom-icon-background-position(2px);
+}
+
+.nav li.active .icon-bottom-home, .nav li:active .icon-bottom-home {
+  @include nav-bottom-icon-background-position(-207px);
+}
+
+.icon-bottom-money {
+  @include nav-bottom-icon-background-position(-44px);
+}
+
+.nav li.active .icon-bottom-money, .nav li.active .icon-bottom-money {
+  @include nav-bottom-icon-background-position(-253px);
+}
+
+.icon-bottom-transfer {
+  @include nav-bottom-icon-background-position(-83px);
+}
+
+.nav li.active .icon-bottom-transfer, .nav li.active .icon-bottom-transfer {
+  @include nav-bottom-icon-background-position(-292px);
+}
+
+.icon-bottom-borrow {
+  @include nav-bottom-icon-background-position(-122px);
+}
+
+.nav li.active .icon-bottom-borrow, .nav li.active .icon-bottom-borrow {
+  @include nav-bottom-icon-background-position(-331px);
+}
+
+.icon-bottom-user {
+  @include nav-bottom-icon-background-position(-162px);
+}
+
+.nav li.active .icon-bottom-user, .nav li.active .icon-bottom-user {
+  @include nav-bottom-icon-background-position(-371px);
+}
+
+//button style
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 11px 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  @include btn-primary-btn();
+
+  &:hover, &.focus, &:focus, &.active, &:active {
+    display: block;
+    width: 100%;
+    padding: 11px 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    @include btn-primary-btn();
+  }
+}
+
+//labels and part of icons
+.new-label {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  z-index: 1;
+  background: #57adfa;
+  color: #fff;
+  font-size: 12px;
+  padding-top: 5px;
+  width: 40px;
+  text-align: center;
+}
+
+.new-label:after {
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  content: "";
+  border-color: #57adfa transparent transparent transparent;
+  border-style: solid;
+  border-width: 6px 20px 0 20px;
+}
+
+.label-tag {
+  height: 18px;
+  line-height: 15px;
+  padding: 5px 0;
+  padding-left: 20px;
+  color: #898989;
+  margin-right: 20px;
+  font-size: 13px;
+}
+
+.label-tag:last-child {
+  margin-right: 0;
+}
+
+.tag-date {
+  background: url(../../images/icon_03.png) 0 50% no-repeat;
+}
+
+.tag-money {
+  background: url(../../images/icon_04.png) 0 50% no-repeat;
+}
